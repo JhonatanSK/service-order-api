@@ -1,6 +1,6 @@
 package com.jhonatan.serviceorderapi.api.exceptionhandler;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonInclude(Include.NON_NULL)
 public class Problems {
 	private Integer status;
-	private LocalDateTime datahora;
+	private OffsetDateTime datahora;
 	private String title;
 	private List<Campo> campos;
 
@@ -49,11 +49,11 @@ public class Problems {
 		this.status = status;
 	}
 
-	public LocalDateTime getDatahora() {
+	public OffsetDateTime getDatahora() {
 		return datahora;
 	}
 
-	public void setDatahora(LocalDateTime datahora) {
+	public void setDatahora(OffsetDateTime datahora) {
 		this.datahora = datahora;
 	}
 

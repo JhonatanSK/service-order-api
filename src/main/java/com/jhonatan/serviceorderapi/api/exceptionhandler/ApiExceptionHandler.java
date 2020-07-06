@@ -1,6 +1,6 @@
 package com.jhonatan.serviceorderapi.api.exceptionhandler;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,18 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		Problems problem = new Problems();
 		problem.setStatus(status.value());
 		problem.setTitle(ex.getMessage());
-		problem.setDatahora(LocalDateTime.now());
+		problem.setDatahora(OffsetDateTime.now());
+		
+		return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
+	}
+	
+	@ExceptionHandler(Exceptions.class)
+	public ResponseEntity<Object> handleEntityNotFoundException(Exceptions ex, WebRequest request) {
+		HttpStatus status = HttpStatus.NOT_FOUND;
+		Problems problem = new Problems();
+		problem.setStatus(status.value());
+		problem.setTitle(ex.getMessage());
+		problem.setDatahora(OffsetDateTime.now());
 		
 		return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
 	}
@@ -52,7 +63,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		Problems problem = new Problems();
 		problem.setStatus(status.value());
 		problem.setTitle("Um ou mais campos estão inválidos, Preencha corretamente e tente novamente");
-		problem.setDatahora(LocalDateTime.now());
+		problem.setDatahora(OffsetDateTime.now());
 		problem.setCampos(campos);
 		
 		return super.handleExceptionInternal(ex, problem, headers, status, request);
